@@ -2,12 +2,14 @@ package com.hilmibaskoparan.audit;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 abstract public class AuditingAwareBaseDto implements Serializable {
 
     // Auditing: Database hangi kullanıcı ne zaman ne ekledi veya ne güncelledi vs.
