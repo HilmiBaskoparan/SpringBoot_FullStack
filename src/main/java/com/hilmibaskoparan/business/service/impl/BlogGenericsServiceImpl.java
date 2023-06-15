@@ -5,6 +5,8 @@ import com.hilmibaskoparan.business.dto.BlogDto;
 import com.hilmibaskoparan.business.service.IBlogGenericsService;
 import com.hilmibaskoparan.data.entity.BlogEntity;
 import com.hilmibaskoparan.data.repository.IBlogRepository;
+import com.hilmibaskoparan.exception.BadRequestException;
+import com.hilmibaskoparan.exception.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +15,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.webjars.NotFoundException;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor    // Injection
 @Log4j2
@@ -42,12 +47,12 @@ public class BlogGenericsServiceImpl implements IBlogGenericsService<BlogDto, Bl
     // ### Model Mapper ###############################
     @Override
     public BlogDto entityToDto(BlogEntity blogEntity) {
-        return null;
+        return modelMapperBean.modelMapperMethod().map(blogEntity, BlogDto.class);
     }
 
     @Override
     public BlogEntity dtoToEntity(BlogDto blogDto) {
-        return null;
+        return modelMapperBean.modelMapperMethod().map(blogDto, BlogEntity.class);
     }
 
     // ### CRUD ###############################
@@ -55,33 +60,72 @@ public class BlogGenericsServiceImpl implements IBlogGenericsService<BlogDto, Bl
     @Transactional // Create, Delete, Update
     @Override
     public BlogDto blogServiceCreate(BlogDto blogDto) {
-        return null;
+        if (blogDto != null) {
+            BlogEntity blogEntityModel = dtoToEntity(blogDto);
+            BlogEntity blogEntity = iBlogRepository.save(blogEntityModel);
+            blogDto.setId(blogEntity.getId());
+            blogDto.setSystemDate(blogDto.getSystemDate());
+        } else if (blogDto == null) {
+            throw new BadRequestException("BlogDto yoktur");
+        }
+        return blogDto;
     }
 
     // LIST
     @Override
     public List<BlogDto> blogServiceList() {
-        return null;
+        Iterable<BlogEntity> blogEntityIterable =  iBlogRepository.findAll();
+        List<BlogDto> blogDtoList = new ArrayList<>();
+        for (BlogEntity entity : blogEntityIterable) {
+            BlogDto blogDto = entityToDto(entity);
+            blogDtoList.add(blogDto);
+        }
+        return blogDtoList;
     }
 
     // FIND
     @Override
     public BlogDto blogServiceFindById(Long id) {
-        return null;
+        BlogEntity blogEntity = null;
+        if (id != null) {
+            blogEntity = iBlogRepository.findById(id).
+                    orElseThrow(() -> new ResourceNotFoundException(id + " nolu ID bulunamadı."));
+        } else if (id == null) {
+            throw new BadRequestException(id + " BlogDto NULL Geldi."); // 400 Error
+        }
+
+        return entityToDto(blogEntity);
+        /*return entityToDto(iBlogRepository.findById(id).
+                orElseThrow(() -> new ResourceNotFoundException(id + " nolu ID bulunamadı.")));*/
     }
 
     // DELETE
     @Transactional // Create, Delete, Update
     @Override
     public BlogDto blogServiceDeleteById(Long id) {
-        return null;
+        BlogDto blogDto = blogServiceFindById(id);
+        BlogEntity blogEntity = dtoToEntity(blogDto);
+        iBlogRepository.delete(blogEntity);
+        return blogDto;
     }
 
     // UPDATE
     @Transactional // Create, Delete, Update
     @Override
     public BlogDto blogServiceUpdateById(Long id, BlogDto blogDto) {
-        return null;
+        BlogDto blogDtoFind = blogServiceFindById(id);
+        BlogEntity blogEntity = dtoToEntity(blogDtoFind);
+
+        if (blogEntity != null) {
+            blogEntity.setId(blogDtoFind.getId());
+            blogEntity.setHeader(blogDtoFind.getHeader());
+            blogEntity.setContent(blogDtoFind.getContent());
+            iBlogRepository.save(blogEntity);
+            blogDto.setId(blogEntity.getId());
+            blogDto.setSystemDate(blogEntity.getSystemDate());
+        }
+
+        return blogDtoFind;
     }
 
     // ### PAGEABLE ###############################

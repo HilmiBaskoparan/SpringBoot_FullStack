@@ -21,7 +21,7 @@ public class ModelMapperBean {
     */
 
     @Bean
-    public ModelMapper modelMapper() {
+    public ModelMapper modelMapperMethod() {
         return new ModelMapper();
     }
 
