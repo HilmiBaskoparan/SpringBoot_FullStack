@@ -1,6 +1,7 @@
 package com.hilmibaskoparan.audit;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -14,12 +15,11 @@ abstract public class AuditingAwareBaseDto implements Serializable {
     // Serialization
     public static final Long serialVersionUID = 1L;
 
-    // ID
-    private Long id;
+    private Long id;            // ID
+    @Builder.Default
+    private Date systemDate = new Date(System.currentTimeMillis());    // DATE
 
-    // DATE
-    private Date systemDate;
-
+    // AUDITING
     @JsonIgnore // Backend'de giden veriyi saklar
     protected String createdUser;
 
