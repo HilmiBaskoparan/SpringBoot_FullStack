@@ -9,11 +9,11 @@ public class PersistLink {
     // http://localhost:3000/
 
     // Backend URL
-    // http://localhost:2222/
+    // http://localhost:4040/
 
     // H2-Console
-    // http://localhost:2222/h2-console
+    // http://localhost:4040/h2-console
 
     // Swagger URL
-    // http://localhost:2222/swagger-ui/index.html
+    // http://localhost:4040/swagger-ui/index.html
 }
