@@ -15,11 +15,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.webjars.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor    // Injection
 @Log4j2
@@ -132,7 +130,14 @@ public class BlogGenericsServiceImpl implements IBlogGenericsService<BlogDto, Bl
     // List: pageable
     @Override
     public List<BlogDto> blogServiceAllList() {
-        return null;
+        Iterable<BlogEntity> blogEntityList = iBlogRepository.findAll();
+        List<BlogDto> blogDtoList = new ArrayList<>();
+
+        for (BlogEntity blogEntity: blogEntityList) {
+            BlogDto blogDto = entityToDto(blogEntity);
+            blogDtoList.add(blogDto);
+        }
+        return blogDtoList;
     }
 
     // List: Page page,size
@@ -150,19 +155,35 @@ public class BlogGenericsServiceImpl implements IBlogGenericsService<BlogDto, Bl
     // ### PROFILE ###############################
     // ÇOKLU VERİ EKLE
     @Override
-    public String speedDataService() {
-        return null;
+    public List<BlogDto> speedDataService() {
+        List<BlogDto> blogDtoList = null;
+        for (int i = 1; i <= 10; i++) {
+            BlogDto blogDto = BlogDto.builder()
+                    .header("header" + i)
+                    .content("content" + i)
+                    .build();
+            blogServiceCreate(blogDto);
+            blogDtoList.add(blogDto);
+        }
+        return blogDtoList;
     }
 
     // ÇOKLU VERİ EKLE
     @Override
     public String allDeleteService() {
-        return null;
+        iBlogRepository.deleteAll();
+        log.info("Silindi");
+        return "Silindi.";
     }
 
     // APP INFORMATION
     @Override
     public String appInformationService(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+        String uri = request.getRequestURI();
+        String localhost = request.getLocalAddr();
+        String session = request.getSession().toString();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(uri).append(" ").append(localhost).append(" ").append(session);
+        return stringBuilder.toString();
     }
 }
