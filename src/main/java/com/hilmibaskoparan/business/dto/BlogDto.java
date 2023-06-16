@@ -25,6 +25,6 @@ public class BlogDto extends AuditingAwareBaseDto implements Serializable {
     private String header;
 
     @NotEmpty(message = "{blog.content.validation.constraints.NotNull.message}")
-    @Size(min = 50, message = "{blog.content.least.validation.constraints.NotNull.message}")
+    @Size(min = 10, message = "{blog.content.least.validation.constraints.NotNull.message}")
     private String content;
 }

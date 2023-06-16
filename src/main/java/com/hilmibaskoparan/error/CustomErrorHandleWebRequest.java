@@ -44,14 +44,14 @@ public class CustomErrorHandleWebRequest implements ErrorController {
                 webRequest, ErrorAttributeOptions.of(ErrorAttributeOptions.Include.MESSAGE, ErrorAttributeOptions.Include.BINDING_ERRORS)
         );
 
-        status = (int) attributes.get("status");
+        status = (Integer) attributes.get("status");
         path = (String) attributes.get("path");
         message = (String) attributes.get("message");
         apiResult = new ApiResult(status, path, message);
 
         // Attributes da apiResult varsa
-        if (attributes.containsKey("error")){
-            List<FieldError> fieldErrorList = (List<FieldError>) attributes.get("error");
+        if (attributes.containsKey("errors")){
+            List<FieldError> fieldErrorList = (List<FieldError>) attributes.get("errors");
             Map<String, Object> validationMistake = new HashMap<>();
             for (FieldError f : fieldErrorList) {
                 validationMistake.put(f.getField(), f.getDefaultMessage());

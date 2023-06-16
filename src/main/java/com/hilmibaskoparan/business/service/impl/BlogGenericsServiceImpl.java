@@ -115,15 +115,15 @@ public class BlogGenericsServiceImpl implements IBlogGenericsService<BlogDto, Bl
         BlogEntity blogEntity = dtoToEntity(blogDtoFind);
 
         if (blogEntity != null) {
-            blogEntity.setId(blogDtoFind.getId());
-            blogEntity.setHeader(blogDtoFind.getHeader());
-            blogEntity.setContent(blogDtoFind.getContent());
+            blogEntity.setId(id);
+            blogEntity.setHeader(blogDto.getHeader());
+            blogEntity.setContent(blogDto.getContent());
             iBlogRepository.save(blogEntity);
             blogDto.setId(blogEntity.getId());
             blogDto.setSystemDate(blogEntity.getSystemDate());
         }
 
-        return blogDtoFind;
+        return entityToDto(blogEntity);
     }
 
     // ### PAGEABLE ###############################
@@ -156,7 +156,7 @@ public class BlogGenericsServiceImpl implements IBlogGenericsService<BlogDto, Bl
     // ÇOKLU VERİ EKLE
     @Override
     public List<BlogDto> speedDataService() {
-        List<BlogDto> blogDtoList = null;
+        List<BlogDto> blogDtoList = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
             BlogDto blogDto = BlogDto.builder()
                     .header("header" + i)

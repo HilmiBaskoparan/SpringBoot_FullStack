@@ -90,11 +90,12 @@ public class BlogApiImpl implements IBlogGenericsApi<BlogDto> {
     public ResponseEntity<?> blogServiceUpdateById(
             @PathVariable(name = "id", required = false) Long id,
             @Valid @RequestBody BlogDto blogDto) {
+        blogDto.setId(id);
         return ResponseEntity.ok(iBlogGenericsService.blogServiceUpdateById(id, blogDto));
     }
 
     ///////////////
-    // SPEED, DELETE ALL
+    // SPEED
     // localhost:4040/blog/api/v1/speed/data
     @Override
     @GetMapping("/speed/data")
