@@ -1,6 +1,9 @@
 // rcc
 import React, { Component } from 'react'
 
+// CSS
+import "./style.css"
+
 // CLASS Componenet
 export default class Header extends Component {
     constructor(props) {
@@ -211,7 +214,8 @@ export default class Header extends Component {
                 >
                     <div className="container">
                         <a className="navbar-brand" href="#">
-                            <img src="./img/logo.jpg" alt="it isn't showing logo" id="logo_id" />
+                            {/* ./img/logo.jpg */}
+                            <img src="" alt="it isn't showing logo" id="logo_id" />
                         </a>
                         <button
                             className="navbar-toggler d-lg-none"
