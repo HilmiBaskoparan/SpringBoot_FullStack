@@ -1,8 +1,11 @@
 // rcc
 import React, { Component } from 'react'
 
+// i18n
+import { withTranslation } from 'react-i18next';
+
 // CLASS COMPONENT
-export default class Footer extends Component {
+class Footer extends Component {
     constructor(props) {
         super(props);
 
@@ -124,3 +127,6 @@ export default class Footer extends Component {
         )
     } // end render
 } // end class
+
+// i18n Wrapper
+export default withTranslation()(Footer)

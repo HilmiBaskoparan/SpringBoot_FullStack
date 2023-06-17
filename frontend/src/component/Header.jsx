@@ -1,13 +1,18 @@
 // rcc
 import React, { Component } from 'react'
 
+// i18n
+import { withTranslation } from 'react-i18next';
+
 // Image
 import Logo from './img/logo.jpg'
 import FlagTurkish from './img/flag/tr.png'
 import FlagEnglish from './img/flag/en.png'
+import OtherLanguageReusability from '../internationalization/OtherLanguageReusability';
+
 
 // CLASS Componenet
-export default class Header extends Component {
+class Header extends Component {
     constructor(props) {
         super(props);
 
@@ -64,6 +69,7 @@ export default class Header extends Component {
                                             <i className="fa-solid fa-circle-half-stroke" />
                                         </button>
                                     </li>
+                                    {/* <OtherLanguageReusability/> */}
                                     <li>
                                         <img src={FlagEnglish} className="flag" alt="" />
                                     </li>
@@ -303,3 +309,6 @@ export default class Header extends Component {
         )
     } // end render
 } // end class
+
+// i18n Wrapper
+export default withTranslation()(Header)

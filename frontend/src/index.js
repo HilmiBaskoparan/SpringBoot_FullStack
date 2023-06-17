@@ -4,10 +4,15 @@ import RouterMain from './component/RouterMain';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
+// 18n (dil)
+import './internationalization/i18nlanguage'
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterMain/>
+    <React.Fragment>
+      <RouterMain />
+    </React.Fragment>
   </React.StrictMode>
 );
 
