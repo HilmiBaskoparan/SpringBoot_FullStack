@@ -13,6 +13,11 @@ import OtherLanguageReusability from '../internationalization/OtherLanguageReusa
 
 // CLASS Componenet
 class Header extends Component {
+    
+    // Component'daki yeni ismi
+    static displayName="Blog_Header";
+
+    // Constructor
     constructor(props) {
         super(props);
 

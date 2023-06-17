@@ -9,6 +9,11 @@ import { withTranslation } from 'react-i18next';
 
 // CLASS COMPONENT
 class Main extends Component {
+    
+    // Component'daki yeni ismi
+    static displayName="Blog_Main";
+
+    // Constructor
     constructor(props){
         super(props);
 
