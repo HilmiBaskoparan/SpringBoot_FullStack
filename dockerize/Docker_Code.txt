@@ -1,0 +1,21 @@
+./mvnw clean package -DskipTests
+
+docker-compose up               // Başlatmak için
+docker-compose up -d            // Başlatmak için
+docker-compose down             // Kapatmak için
+docker ps
+
+
+
+
+
+################################################
+# Dockerfile üzerinden Image Oluşturma
+docker build .
+
+# Image List
+docker image ls
+
+docker image prune
+
+docker run -p 2222:2222 imageName
