@@ -1,9 +1,6 @@
 // rcc
 import React, { Component } from 'react'
 
-// CSS
-import "./style.css"
-
 // Image
 import Logo from './img/logo.jpg'
 import FlagTurkish from './img/flag/tr.png'
