@@ -4,8 +4,15 @@ import Footer from './Footer';
 import Header from './Header';
 import Main from './Main';
 
+// i18n 
+import { withTranslation } from 'react-i18next';
+
 // CLASS COMPONENT
-export default class RouterMain extends Component {
+class RouterMain extends Component {
+
+    // Componentteki yeni isim
+   static displayName="Blog_Router"
+
     constructor(props){
         super(props);
 
@@ -28,7 +35,7 @@ export default class RouterMain extends Component {
         // RETURN
         return (
             // <div>RouterMain</div>
-            // <React.RouterMain>FooRouterMainter</React.RouterMain>
+            // <React.Fragment>FooRouterMainter</React.Fragment>
             <>
                 <Header/>
                 <br />
@@ -39,3 +46,5 @@ export default class RouterMain extends Component {
         )
     } // end render
 } // end class
+
+export default withTranslation()(RouterMain)

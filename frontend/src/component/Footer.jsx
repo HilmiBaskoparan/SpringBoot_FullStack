@@ -33,7 +33,7 @@ class Footer extends Component {
         // RETURN
         return (
             // <div>Footer</div>
-            // <React.Footer>Footer</React.Footer>
+            // <React.Fragment>Footer</React.Fragment>
             <>
                 {/* footer start */}
                 <footer id="footer_id">

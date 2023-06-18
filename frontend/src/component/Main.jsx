@@ -36,7 +36,7 @@ class Main extends Component {
         // RETURN
         return (
             // <div>Main</div>
-            // <React.Main>Main</React.Main>
+            // <React.Fragment>Main</React.Fragment>
             <>
                 {/* main start */}
                 <main id="main_id">

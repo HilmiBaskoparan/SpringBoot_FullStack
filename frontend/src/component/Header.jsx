@@ -4,10 +4,12 @@ import React, { Component } from 'react'
 // i18n
 import { withTranslation } from 'react-i18next';
 
-// Image
+// image LOGO, FLAG
 import Logo from './img/logo.jpg'
 import FlagTurkish from './img/flag/tr.png'
 import FlagEnglish from './img/flag/en.png'
+
+// OtherLanguageReusability
 import OtherLanguageReusability from '../internationalization/OtherLanguageReusability';
 
 
@@ -40,7 +42,7 @@ class Header extends Component {
         // RETURN
         return (
             // <div>Header</div>
-            // <React.Header>Header</React.Header>
+            // <React.Fragment>Header</React.Fragment>
             <>
                 {/* navbar First start */}
                 <nav id="navbar_first">
@@ -315,5 +317,6 @@ class Header extends Component {
     } // end render
 } // end class
 
+// export default Header;
 // i18n Wrapper
 export default withTranslation()(Header)

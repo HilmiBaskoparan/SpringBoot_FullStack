@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+// RouterMain
 import RouterMain from './component/RouterMain';
+// CSS
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 // 18n (dil)
 import './internationalization/i18nlanguage'
 
+// DOM ROOT
 const root = ReactDOM.createRoot(document.getElementById('root'));
+// RENDER
 root.render(
   <React.StrictMode>
     <React.Fragment>
