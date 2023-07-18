@@ -1,4 +1,36 @@
+#############################################################################
+### HTML TO JSX ##################################################################
 HTML TO JSX
 https://transform.tools/html-to-jsx
 
-style={{color:"red"}}
+#############################################################################
+### JSX ##################################################################
+Dikkat: Açılan her tag kapatılmalıdır.
+OLD                     NEW
+--------------          ---------------------------
+style                   style={{color:"red"}}
+for                     HtmlFor 
+class                   className
+onclick                 onClick
+ondblclick              onDoubleClick
+
+#############################################################################
+### ROUTER ##################################################################
+package.json 
+ "react-router-dom": "^5.2.0",
+-DİKKAT: Proje sonrasında projeyi kapat: npm install yapmalısın ki router doğru çalışsın
+-BrowserRouter as Router 
+-HashRouter as Router
+
+OLD                     NEW
+--------------          ---------------------------
+<a href=""/>            <Link to=""/>
+
+
+#############################################################################
+### COMMON REACT ############################################################
+props: Componentler arasında veri gönderimini sağlar.
+<Header logo="" homePageLink="http://localhost:3000/index" ></Header>
+
+function component => props.logo
+class component    => this.props.logo
