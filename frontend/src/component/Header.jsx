@@ -4,26 +4,27 @@ import React, { Component } from 'react'
 // i18n
 import { withTranslation } from 'react-i18next';
 
-// image LOGO, FLAG
+// image LOGO,FLAG
 import Logo from './img/logo.jpg'
 import FlagTurkish from './img/flag/tr.png'
 import FlagEnglish from './img/flag/en.png'
 
 // OtherLanguageReusability
 import OtherLanguageReusability from '../internationalization/OtherLanguageReusability';
+import { Link } from 'react-router-dom';
 
 
-// CLASS Componenet
+// CLASS Component
 class Header extends Component {
-    
-    // Component'daki yeni ismi
-    static displayName="Blog_Header";
 
-    // Constructor
+    // Componentteki yeni isim
+    static displayName = "Blog_Header"
+
+    // CONSTRUCTOR
     constructor(props) {
         super(props);
 
-        // bind
+        //bind
 
         //state
         this.state = {}
@@ -36,13 +37,13 @@ class Header extends Component {
 
     // FUNCTION
 
-    // RENDER
+    //RENDER
     render() {
 
-        // RETURN
+        //RETURN
         return (
             // <div>Header</div>
-            // <React.Fragment>Header</React.Fragment>
+            //<React.Fragment>Header</React.Fragment>
             <>
                 {/* navbar First start */}
                 <nav id="navbar_first">
@@ -55,8 +56,7 @@ class Header extends Component {
                                         <button
                                             className="btn btn-sm btn-primary"
                                             data-bs-toggle="offcanvas"
-                                            data-bs-target="#offCanvasRegisterId"
-                                        >
+                                            data-bs-target="#offCanvasRegisterId">
                                             <i className="fa-solid fa-user-secret" />
                                         </button>
                                     </li>
@@ -65,8 +65,7 @@ class Header extends Component {
                                         <button
                                             className="btn btn-sm btn-primary"
                                             data-bs-toggle="modal"
-                                            data-bs-target="#loginModalId"
-                                        >
+                                            data-bs-target="#loginModalId">
                                             <i className="fa-solid fa-circle-user" />
                                         </button>
                                     </li>
@@ -77,13 +76,7 @@ class Header extends Component {
                                         </button>
                                     </li>
                                     {/* <OtherLanguageReusability/> */}
-                                    <li>
-                                        <img src={FlagEnglish} className="flag" alt="" />
-                                    </li>
-                                    <li>
-                                        {" "}
-                                        <img src={FlagTurkish} className="flag" alt="" />
-                                    </li>
+                                    <OtherLanguageReusability/>
                                 </ul>
                             </div>
                             <div id="navbar_first_right" className="col-4 mx-auto">
@@ -111,6 +104,9 @@ class Header extends Component {
                         </div>
                     </div>
                 </nav>
+
+                   
+         
                 {/* Modal Login */}
                 {/* if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard */}
                 <div
@@ -121,12 +117,10 @@ class Header extends Component {
                     data-bs-keyboard="false"
                     role="dialog"
                     aria-labelledby="modalTitleId"
-                    aria-hidden="true"
-                >
+                    aria-hidden="true">
                     <div
                         className="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg"
-                        role="document"
-                    >
+                        role="document">
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title" id="modalTitleId">
@@ -243,34 +237,36 @@ class Header extends Component {
                         >
                             <span className="navbar-toggler-icon" />
                         </button>
+
                         <div className="collapse navbar-collapse" id="collapsibleNavId">
                             <ul className="navbar-nav me-auto mt-2 mt-lg-0">
                                 <li className="nav-item">
                                     <a className="nav-link active" href="#" aria-current="page">
-                                        Anasayfa <span className="visually-hidden">(current)</span>
+                                        {this.props.homePage} <span className="visually-hidden">(current)</span>
                                     </a>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" href="#studies">
-                                        Çalışmalar
+                                    {this.props.work} 
                                     </a>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" href="#performance">
-                                        Başarılar
+                                    {this.props.success} 
                                     </a>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" href="#newspaper">
-                                        Haberler
+                                         {this.props.newsPaper} 
                                     </a>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" href="#about">
-                                        Hakkımızda
+                                    {this.props.aboutMe}
                                     </a>
                                 </li>
-                                <li className="nav-item dropdown">
+
+                                {/* <li className="nav-item dropdown">
                                     <a
                                         className="nav-link dropdown-toggle"
                                         href="#"
@@ -282,17 +278,22 @@ class Header extends Component {
                                         Blog
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="dropdownId">
-                                        <a className="dropdown-item" href="#blog">
+                                         <a className="dropdown-item" href="blog/list">
                                             Yazılım
-                                        </a>
-                                        <a className="dropdown-item" href="#">
-                                            Bilim
-                                        </a>
+                                        </a> 
+                                         <Link className="dropdown-item" to={'/blog/list'}>
+                                            Blog List
+                                        </Link> 
                                     </div>
+                                </li> */}
+                                <li className="nav-item">
+                                    <Link className="nav-link" to={'/blog/list'}>
+                                    {this.props.blog}
+                                    </Link>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" href="#maps">
-                                        İletişim
+                                    {this.props.contact}
                                     </a>
                                 </li>
                             </ul>
@@ -312,11 +313,26 @@ class Header extends Component {
                 </nav>
                 {/* navbar end */}
             </>
-
-        )
+        ) //end return
     } // end render
-} // end class
+}//end clas
+
+// default Props
+Header.defaultProps={
+  //homePage:this.props.t('homePage'),
+  homePage:"Anasayfa",
+  work:"Çalışmalarımız",
+  success:"Başarılar",
+  newsPaper:"Haberler",
+  aboutMe:"Hakkımızda",
+  blog:" Blog",
+  contact:"İletişim"  
+}
 
 // export default Header;
 // i18n Wrapper
-export default withTranslation()(Header)
+// export default withTranslation()(Header)
+export default withTranslation()(Header);
+
+
+
